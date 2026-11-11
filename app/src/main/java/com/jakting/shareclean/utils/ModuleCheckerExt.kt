@@ -7,27 +7,23 @@ import com.jakting.shareclean.utils.application.Companion.appContext
 import com.topjohnwu.superuser.Shell
 
 fun moduleApplyAvailable(): Boolean {
-    val resolveInfoList = appContext.packageManager!!.queryIntentActivities(
-        Intent(Intent.ACTION_PROCESS_TEXT).setType("text/tigerinthewall"),
-        PackageManager.MATCH_ALL
-    )
-    for (resolveInfo in resolveInfoList) {
-        if (resolveInfo.activityInfo.packageName == appContext.packageName) {
-            return false
-        }
+    // 模块生效后会拦截本应用对 text/tigerinthewall 的查询并返回空列表
+    return try {
+        val resolveInfoList = appContext.packageManager.queryIntentActivities(
+            Intent(Intent.ACTION_PROCESS_TEXT).setType("text/tigerinthewall"),
+            PackageManager.MATCH_ALL
+        )
+        resolveInfoList.none { it.activityInfo.packageName == appContext.packageName }
+    } catch (e: Exception) {
+        false
     }
-    return true
 }
 
 fun Context?.moduleInfo(): Array<String> {
-    // 检查 Riru 版
-    val riruShell = runShell("cat /data/adb/modules/riru_ifw_enhance_tiw/module.prop")
-    if(riruShell.isSuccess){
-        return arrayOf("Riru", moduleVersion(riruShell)[0]!!, moduleVersion(riruShell)[1]!!)
-    }
     val zygiskShell = runShell("cat /data/adb/modules/zygisk_ifw_enhance_tiw/module.prop")
     if(zygiskShell.isSuccess){
-        return arrayOf("Zygisk", moduleVersion(zygiskShell)[0]!!, moduleVersion(zygiskShell)[1]!!)
+        val version = moduleVersion(zygiskShell)
+        return arrayOf("Zygisk", version[0] ?: "", version[1] ?: "")
     }
     return arrayOf("", "", "")
 }

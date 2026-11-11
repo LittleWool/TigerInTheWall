@@ -8,37 +8,54 @@ plugins {
     id 'com.mikepenz.aboutlibraries.plugin'
 }
 
+def keystorePropsFile = rootProject.file('keystore.properties')
+def keystoreProps = new Properties()
+def hasReleaseKeystore = keystorePropsFile.exists()
+if (hasReleaseKeystore) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+}
+
 android {
-    compileSdk 33
+    compileSdk 34
     buildFeatures.dataBinding = true
     defaultConfig {
         applicationId "com.jakting.shareclean"
         minSdk 26
-        targetSdk 33
-        versionCode 202304301
-        versionName "2.0.0"
+        targetSdk 34
+        versionCode 202511111
+        versionName "2.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            if (hasReleaseKeystore) {
+                storeFile rootProject.file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 有 keystore.properties 时用正式签名，否则退回 debug 签名以便本地安装验证
+            signingConfig hasReleaseKeystore ? signingConfigs.release : signingConfigs.debug
         }
         debug {
             applicationIdSuffix ".debug"
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    kotlin {
-        jvmToolchain(11)
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
     namespace 'com.jakting.shareclean'
     buildFeatures {
@@ -69,9 +86,9 @@ dependencies {
 
     implementation 'com.github.liangjingkanji:BRV:1.3.80'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.github.liangjingkanji:Net:3.5.8'
+    implementation 'com.github.liangjingkanji:Net:3.5.7'
 
-    implementation 'com.tencent:mmkv:1.2.15'
+    implementation 'com.tencent:mmkv:2.4.3'
 
     implementation 'com.github.topjohnwu.libsu:core:5.0.1'
 

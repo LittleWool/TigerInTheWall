@@ -2,6 +2,7 @@ package com.jakting.shareclean.utils
 
 import android.content.Context
 import android.content.Intent
+import android.util.Base64
 import com.jakting.shareclean.utils.application.Companion.kv
 import com.jakting.shareclean.utils.application.Companion.settingSharedPreferences
 
@@ -96,16 +97,20 @@ fun Context?.writeIfwFiles(): Boolean {
     }
     var result = true
     intentTypeList.forEach { itType ->
-        if (runShell("touch ${getIFWPath(itType)}").isSuccess &&
-            runShell(
-                "echo '${generateIfwFileContent(intentTypeMap[itType]!!)}' > ${
-                    getIFWPath(
-                        itType
-                    )
-                }"
-            ).isSuccess
-        ) {
-            logd("写入${getIFWPath(itType)}成功")
+        val path = getIFWPath(itType)
+        // 用 base64 传输，避免 XML 中的单引号、换行被 shell 解释
+        val encoded = Base64.encodeToString(
+            generateIfwFileContent(intentTypeMap[itType]!!).toByteArray(Charsets.UTF_8),
+            Base64.NO_WRAP
+        )
+        val writeResult = runShell(
+            // 0644：system_server 需要读取该文件，600 会被 IntentFirewall 静默跳过
+            "mkdir -p /data/system/ifw && echo '$encoded' | base64 -d > $path && chmod 644 $path"
+        )
+        if (writeResult.isSuccess) {
+            // 部分 ROM 没有 restorecon，失败不影响写入结果
+            runShell("restorecon $path 2>/dev/null")
+            logd("写入$path 成功")
         } else {
             result = false
         }

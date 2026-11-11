@@ -73,3 +73,8 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 .idea/
+
+# release signing
+keystore.properties
+*.jks
+*.keystore

@@ -32,7 +32,7 @@ class AppInfo() {
         resolveInfoListHashMap["3_view"] = (
                 appContext.packageManager!!.queryIntentActivities(
                     Intent(Intent.ACTION_VIEW).setDataAndType(
-                        Uri.parse("content://com.jakting.shareclean.fileprovider/selfile/nofile"),
+                        Uri.parse("content://${appContext.packageName}.fileprovider/selfile/nofile"),
                         "*/*"
                     ),
                     PackageManager.MATCH_ALL
