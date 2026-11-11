@@ -8,6 +8,9 @@
     <string name="coming_soon">即将来到…？</string>
     <string name="status_card_click">啥都没有。芜湖！💩</string>
     <string name="status_card_unknown">状态未知🤔</string>
+    <string name="status_card_no_root">未获得 Root 权限</string>
+    <string name="status_card_no_root_detail">点此查看如何授权</string>
+    <string name="status_card_no_root_toast">「墙中虎」需要 Root 权限，请在 Magisk 或 KernelSU 中授予</string>
     <string name="status_card_no_module">模块未安装💩</string>
     <string name="status_card_unknown_detail">点此获取细节</string>
     <string name="status_card_exist">已激活🥳</string>
@@ -16,7 +19,7 @@
     <string name="status_card_dialog_title">状态未知</string>
     <string name="status_card_dialog_content">由于缺少权限，无法获取「IFW Enhance TIW」模块状态。\n\n「墙中虎」需要较高的系统权限以检查模块状态与清理意图。\n\n请确保您拥有 MagiskSU 之类的完整 Root 权限。诸如 MIUI 之类的系统自带的 Root 可能不完整。</string>
     <string name="status_card_dialog_more">更多</string>
-    <string name="status_card_dialog_more_url">https://ic.into.icu/zh-CN/download/</string>
+    <string name="status_card_dialog_more_url">https://github.com/LittleWool/TigerInTheWall/releases</string>
     <string name="manager_clean_title">清理管理</string>
     <string name="manager_clean_detail">鲨了他们</string>
     <string name="manager_quick_clean_title">快速清理</string>

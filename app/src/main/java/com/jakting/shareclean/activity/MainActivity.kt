@@ -7,6 +7,7 @@ import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.HapticFeedbackConstants
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,6 +16,7 @@ import com.jakting.shareclean.BuildConfig
 import com.jakting.shareclean.R
 import com.jakting.shareclean.databinding.ActivityMainBinding
 import com.jakting.shareclean.utils.*
+import com.jakting.shareclean.utils.application.Companion.kv
 import com.jakting.shareclean.utils.application.Companion.shell
 import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.coroutines.launch
@@ -193,6 +195,16 @@ class MainActivity : BaseActivity() {
 
         } else {
             //没有授予 root 的时候，点击卡片会弹窗
+            binding.contentMain.card1Module.cardStatusTitle.text =
+                getString(R.string.status_card_no_root)
+            binding.contentMain.card1Module.cardStatusDesc.text =
+                getString(R.string.status_card_no_root_detail)
+            binding.contentMain.card1Module.cardStatusInject.visibility = View.GONE
+            binding.contentMain.card1Module.cardStatusInjectWhich.visibility = View.GONE
+            if (!kv.decodeBool("root_hint_shown", false)) {
+                kv.encode("root_hint_shown", true)
+                toast(getString(R.string.status_card_no_root_toast))
+            }
             binding.contentMain.card1Module.cardStatus.setOnClickListener {
                 MaterialAlertDialogBuilder(this)
                     .setTitle(getString(R.string.status_card_dialog_title))

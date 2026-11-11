@@ -8,6 +8,9 @@
 
     <string name="status_card_click">啥都沒有。哇呼！💩</string>
     <string name="status_card_unknown">狀態未知🤔</string>
+    <string name="status_card_no_root">未取得 Root 許可權</string>
+    <string name="status_card_no_root_detail">點此查看如何授權</string>
+    <string name="status_card_no_root_toast">「TigerInTheWall」需要 Root 許可權，請在 Magisk 或 KernelSU 中授予</string>
     <string name="status_card_no_module">模組未安裝💩</string>
     <string name="status_card_unknown_detail">點此獲取細節</string>
     <string name="status_card_exist">已啟用🥳</string>
@@ -18,7 +21,7 @@
     <string name="status_card_dialog_no_module_title">模組未安裝</string>
     <string name="status_card_dialog_no_module_content">TigerInTheWall 無法找到模組「IFW Enhance TIW」。\n\n這通常意味著您所做的所有操作都不會生效，請確保您已正確安裝模組。\n\n自新版本開始， TigerInTheWall 需要使用經過修改後的「IFW Enhance TIW」（而不是「IFW Enhance」）</string>
     <string name="status_card_dialog_more">更多</string>
-    <string name="status_card_dialog_more_url">https://ic.into.icu/zh-CN/download/</string>
+    <string name="status_card_dialog_more_url">https://github.com/LittleWool/TigerInTheWall/releases</string>
 
     <string name="manager_clean_title">清理管理</string>
     <string name="manager_clean_detail">鯊了他們</string>

@@ -9,6 +9,9 @@
 
     <string name="status_card_click">There is nothing. Surprise!💩</string>
     <string name="status_card_unknown">Unknown status🤔</string>
+    <string name="status_card_no_root">Root permission required</string>
+    <string name="status_card_no_root_detail">Tap here to grant root access</string>
+    <string name="status_card_no_root_toast">TigerInTheWall needs root permission. Please grant it in Magisk or KernelSU.</string>
     <string name="status_card_no_module">Module not installed💩</string>
     <string name="status_card_unknown_detail">Click here for details</string>
     <string name="status_card_exist">Activated🥳</string>
@@ -20,7 +23,7 @@
     <string name="status_card_dialog_no_module_title">Module not installed</string>
     <string name="status_card_dialog_no_module_content">TigerInTheWall cannot find module \"IFW Enhance TIW\".\n\nUsually, nothing you do will work. Make sure you have install module correctly.\n\nFrom the new version, TigerInTheWall needs to use the modified module \"IFW Enhance TIW\" (not \"IFW Enhance\")</string>
     <string name="status_card_dialog_more">More</string>
-    <string name="status_card_dialog_more_url">https://ic.into.icu/download/</string>
+    <string name="status_card_dialog_more_url">https://github.com/LittleWool/TigerInTheWall/releases</string>
 
     <string name="manager_clean_title">App Cleaner</string>
     <string name="manager_clean_detail">Clean sh*t</string>
